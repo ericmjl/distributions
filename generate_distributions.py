@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from scipy import stats
 from scipy.stats._distn_infrastructure import rv_discrete, rv_continuous
 import numpy as np
+import os
 
 
 #%%
@@ -42,17 +43,17 @@ kwargs = {
 
 
 supports = {
-    'normal': np.linspace(-3, 3),
-    'gamma': np.linspace(0, 5),
-    't': np.linspace(-3, 3),
-    'beta': np.linspace(0, 1),
-    'uniform': np.linspace(0, 1),
-    'half_normal': np.linspace(0, 3),
-    'half_cauchy': np.linspace(0, 3),
-    'exponential': np.linspace(0, 3),
+    'normal': np.linspace(-3, 3, 1000),
+    'gamma': np.linspace(0, 5, 1000),
+    't': np.linspace(-3, 3, 1000),
+    'beta': np.linspace(0, 1, 1000),
+    'uniform': np.linspace(0, 1, 1000),
+    'half_normal': np.linspace(0, 3, 1000),
+    'half_cauchy': np.linspace(0, 3, 1000),
+    'exponential': np.linspace(0, 3, 1000),
     'bernoulli': [0, 1],
-    'binomial': np.arange(0, 10),
-    'poisson': np.arange(0, 10),
+    'binomial': np.arange(0, 10, 1000),
+    'poisson': np.arange(0, 10, 1000),
 }
 
 
@@ -67,14 +68,15 @@ def despine(ax):
     ax.set_yticklabels([])
 
 def plot(name):
+    os.makedirs(name, exist_ok=True)
     distribution = distributions[name]
     dist_kwargs = kwargs[name]
     support = supports[name]
 
-    fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(12, 3))
     dist = distribution(**dist_kwargs)
 
-    def plotdist(ax, color):
+    def plotdist(color):
+        fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(6, 3))
         if isinstance(distribution, rv_discrete):
             ax.bar(support, dist.pmf(support), width=0.8, color=color)
         elif isinstance(distribution, rv_continuous):
@@ -82,10 +84,16 @@ def plot(name):
             ax.fill_between(support, 0, dist.pdf(support), color=color)
         ax.set_title(name, size=20)
         despine(ax)
+        plt.savefig(f'{name}/{name}-{color}.pdf')
+        plt.savefig(f'{name}/{name}-{color}-xs.png', dpi=50, transparent=True)
+        plt.savefig(f'{name}/{name}-{color}-sm.png', dpi=75, transparent=True)
+        plt.savefig(f'{name}/{name}-{color}-md.png', dpi=150, transparent=True)
+        plt.savefig(f'{name}/{name}-{color}-lg.png', dpi=300, transparent=True)
+        plt.close()
 
-    plotdist(ax[0], 'salmon')
-    plotdist(ax[1], 'royalblue')
-    plt.savefig(f'{name}.pdf')
+    plotdist('salmon')
+    plotdist('royalblue')
+
 
 
 plot('normal')
