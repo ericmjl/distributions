@@ -1,6 +1,6 @@
 # distributions
 
-In which I store my probability distribution diagrams, and keep them version controlled.
+Because I want picture-perfect distributions to use in my talks!
 
 ## license
 
