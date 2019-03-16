@@ -1,0 +1,10 @@
+name: distributions
+channels:
+- defaults
+- conda-forge
+dependencies:
+- python=3.7
+- conda
+- scipy
+- numpy
+- matplotlib
