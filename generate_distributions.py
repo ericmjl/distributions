@@ -37,7 +37,7 @@ kwargs = {
     'half_cauchy': {'loc': 0, 'scale': 1},
     'exponential': {'loc': 0, 'scale': 1},
     'bernoulli': {'p': 0.8},
-    'binomial': {'p': 0.4, 'n': 10},
+    'binomial': {'p': 0.4, 'n': 20},
     'poisson': {'mu': 2},
 }
 
@@ -52,7 +52,7 @@ supports = {
     'half_cauchy': np.linspace(0, 3, 1000),
     'exponential': np.linspace(0, 3, 1000),
     'bernoulli': [0, 1],
-    'binomial': np.arange(0, 10, 1000),
+    'binomial': np.arange(0, 20),
     'poisson': np.arange(0, 10, 1000),
 }
 
