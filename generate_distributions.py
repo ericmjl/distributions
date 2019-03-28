@@ -38,7 +38,7 @@ kwargs = {
     'exponential': {'loc': 0, 'scale': 1},
     'bernoulli': {'p': 0.8},
     'binomial': {'p': 0.4, 'n': 20},
-    'poisson': {'mu': 2},
+    'poisson': {'mu': 5},
 }
 
 
@@ -53,7 +53,7 @@ supports = {
     'exponential': np.linspace(0, 3, 1000),
     'bernoulli': [0, 1],
     'binomial': np.arange(0, 20),
-    'poisson': np.arange(0, 10, 1000),
+    'poisson': np.arange(0, 10),
 }
 
 
@@ -89,7 +89,7 @@ def plot(name):
         plt.savefig(f'{name}/{name}-{color}-sm.png', dpi=75, transparent=True)
         plt.savefig(f'{name}/{name}-{color}-md.png', dpi=150, transparent=True)
         plt.savefig(f'{name}/{name}-{color}-lg.png', dpi=300, transparent=True)
-        plt.close()
+        # plt.close()
 
     plotdist('salmon')
     plotdist('royalblue')
